@@ -8,26 +8,26 @@
     android:background="@color/black"
     tools:context=".activites.DetailedActivity">
 
+    <!-- Product Image -->
     <ImageView
         android:id="@+id/detailed_img"
         android:layout_width="match_parent"
         android:layout_height="400dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_launcher_background"
-        android:scaleType="centerCrop"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Product Card -->
     <androidx.cardview.widget.CardView
-        android:translationY="20dp"
         android:id="@+id/cardview"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:elevation="10dp"
+        android:translationY="20dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,9 +36,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -48,8 +47,8 @@
                     android:id="@+id/detailed_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product name"
 
+                    android:text="Product name"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -69,12 +68,11 @@
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="12dp"
                     android:isIndicator="true"
                     android:numStars="5"
                     android:stepSize="0.1" />
-
             </RelativeLayout>
 
             <TextView
@@ -87,10 +85,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins"
-                android:text="price"
+                android:text="Price"
+                android:layout_gravity="center_horizontal"
                 android:textColor="#000"
                 android:textSize="21sp"
                 android:textStyle="bold" />
@@ -104,7 +102,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:fontFamily="@font/poppins"
                     android:text=" ₹ "
                     android:textColor="@color/white"
@@ -114,9 +111,8 @@
                     android:id="@+id/detailed_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:fontFamily="@font/poppins"
-                    android:text=" 200 "
+                    android:text="200"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -124,7 +120,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -132,7 +128,7 @@
                     android:id="@+id/add_item"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginRight="7dp"
+                    android:layout_marginEnd="8dp"
                     android:src="@drawable/plusicon" />
 
                 <TextView
@@ -147,38 +143,33 @@
                     android:id="@+id/remove_item"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="8dp"
                     android:src="@drawable/iconminus" />
             </LinearLayout>
-
-
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
+    <!-- Add to Cart and Buy Now Buttons -->
     <Button
         android:id="@+id/add_to_cart"
-        android:layout_width="136dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="52dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:drawableLeft="@drawable/mycart"
         android:drawableTint="@color/white"
         android:padding="14dp"
         android:text="Add TO Cart"
         android:textAllCaps="false"
-
         android:textStyle="bold"
-
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buy_now"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview"
-        app:layout_constraintVertical_bias="0.577"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintTop_toBottomOf="@+id/cardview" />
 
     <Button
         android:id="@+id/buy_now"
-        android:layout_width="150dp"
-        android:layout_height="51dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_baseline_shopping_cart_24"
         android:drawableTint="@color/white"
         android:padding="14dp"
@@ -186,12 +177,8 @@
         android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.808"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview"
-        app:layout_constraintVertical_bias="0.608"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintStart_toEndOf="@+id/add_to_cart"
+        app:layout_constraintTop_toBottomOf="@+id/cardview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
