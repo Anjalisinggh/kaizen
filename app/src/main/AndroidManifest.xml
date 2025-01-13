@@ -12,33 +12,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KaizenArts"
         tools:targetApi="31">
-        <activity android:name=".activites.onBoardingActivity"
+        <activity
+            android:name=".activites.DetailedActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activites.onBoardingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
         <activity
             android:name=".activites.registrationActivity"
-            android:exported="true">
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activites.loginActivity"
-            android:exported="true" >
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activites.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
