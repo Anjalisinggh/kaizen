@@ -13,6 +13,9 @@
         android:theme="@style/Theme.KaizenArts"
         tools:targetApi="31">
         <activity
+            android:name=".activites.ShowAllActivity"
+            android:exported="false" />
+        <activity
             android:name=".activites.DetailedActivity"
             android:exported="true" />
         <activity
@@ -26,10 +29,10 @@
         </activity>
         <activity
             android:name=".activites.registrationActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activites.loginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activites.MainActivity"
             android:exported="true">

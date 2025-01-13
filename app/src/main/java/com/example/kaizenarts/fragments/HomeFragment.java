@@ -1,9 +1,11 @@
 package com.example.kaizenarts.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
+import com.example.kaizenarts.activites.ShowAllActivity;
 import com.example.kaizenarts.adapters.NewProductsAdapter;
 import com.example.kaizenarts.adapters.PopularProductsAdapter;
 import com.example.kaizenarts.models.NewProductsModel;
@@ -25,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -44,6 +47,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+
+    TextView catShowAll,popularShowAll,newProductShowAll;
 
     LinearLayout linearLayout;
     ProgressDialog progressDialog;
@@ -70,6 +75,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        db=FirebaseFirestore.getInstance();
+
         progressDialog=new ProgressDialog(getActivity());
         // Initialize RecyclerView
         catRecycleview = root.findViewById(R.id.rec_category);
@@ -85,9 +92,34 @@ public class HomeFragment extends Fragment {
         catRecycleview.setAdapter(categoryAdapter);
         newProductRecyclerview = root.findViewById(R.id.new_product_rec);
 
+        catShowAll=root.findViewById(R.id.category_see_all);
+        popularShowAll=root.findViewById(R.id.popular_see_all);
+        newProductShowAll=root.findViewById(R.id.newProducts_see_all);
+
+        catShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        newProductShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
+        popularShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
-        db=FirebaseFirestore.getInstance();
 
         linearLayout=root.findViewById(R.id.home_layout);
         linearLayout.setVisibility(View.GONE);
