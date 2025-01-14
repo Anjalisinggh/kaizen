@@ -1,6 +1,8 @@
 package com.example.kaizenarts.models;
 
-public class ShowAllModel {
+import java.io.Serializable;
+
+public class ShowAllModel implements Serializable {
     String  description;
     String name;
     String rating;

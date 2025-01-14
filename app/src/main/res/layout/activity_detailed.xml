@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/material_dynamic_neutral80"
     tools:context=".activites.DetailedActivity">
 
     <!-- Product Image -->
@@ -36,6 +36,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#A77989"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -53,26 +54,7 @@
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_toStartOf="@+id/my_rating"
-                    android:text="4.0"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
 
-                <RatingBar
-                    android:id="@+id/my_rating"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="12dp"
-                    android:isIndicator="true"
-                    android:numStars="5"
-                    android:stepSize="0.1" />
             </RelativeLayout>
 
             <TextView
@@ -82,16 +64,33 @@
                 android:fontFamily="@font/poppins"
                 android:text="Gold-Toned Contemporary Drop Earrings" />
 
-            <TextView
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins"
-                android:text="Price"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#000"
-                android:textSize="21sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:layout_marginLeft="108pt"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.0"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp" />
+
+                <RatingBar
+                    android:id="@+id/my_rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:paddingTop="1dp"
+                    android:numStars="5"
+                    android:stepSize="0.1" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -105,6 +104,7 @@
                     android:fontFamily="@font/poppins"
                     android:text=" ₹ "
                     android:textColor="@color/white"
+                    android:textSize="30dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -114,7 +114,9 @@
                     android:fontFamily="@font/poppins"
                     android:text="200"
                     android:textColor="@color/white"
+                    android:textSize="30dp"
                     android:textStyle="bold" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -126,8 +128,8 @@
 
                 <ImageView
                     android:id="@+id/add_item"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
                     android:layout_marginEnd="8dp"
                     android:src="@drawable/plusicon" />
 
@@ -136,16 +138,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/remove_item"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="8dp"
                     android:src="@drawable/iconminus" />
             </LinearLayout>
+
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -157,7 +161,8 @@
         android:drawableLeft="@drawable/mycart"
         android:drawableTint="@color/white"
         android:padding="14dp"
-        android:text="Add TO Cart"
+        android:text="Add to Cart"
+        android:background="@color/pink"
         android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -174,6 +179,7 @@
         android:drawableTint="@color/white"
         android:padding="14dp"
         android:text="Buy Now"
+        android:background="@color/blue"
         android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

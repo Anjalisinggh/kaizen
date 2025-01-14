@@ -2,12 +2,8 @@ package com.example.kaizenarts.activites;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,42 +21,84 @@ import java.util.List;
 
 public class ShowAllActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    ShowAllAdapter showAllAdapter;
-    List<ShowAllModel> showAllModelList;
+    private RecyclerView recyclerView;
+    private ShowAllAdapter showAllAdapter;
+    private List<ShowAllModel> showAllModelList;
 
-    FirebaseFirestore firestore;
+    private FirebaseFirestore firestore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_show_all);
-        firestore=FirebaseFirestore.getInstance();
 
-        recyclerView=findViewById(R.id.show_all_rec);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        // Initialize Firestore and UI components
+        firestore = FirebaseFirestore.getInstance();
+        recyclerView = findViewById(R.id.show_all_rec);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        showAllModelList=new ArrayList<>();
-        showAllAdapter = new ShowAllAdapter(this,showAllModelList);
+        // Initialize list and adapter
+        showAllModelList = new ArrayList<>();
+        showAllAdapter = new ShowAllAdapter(this, showAllModelList);
         recyclerView.setAdapter(showAllAdapter);
 
+        // Get type from intent
+        String type = getIntent().getStringExtra("type");
+
+        // Fetch data based on type
+        if (type == null || type.isEmpty()) {
+            fetchAllProducts();
+        } else {
+            fetchProductsByType(type);
+        }
+    }
+
+    /**
+     * Fetches all products from the Firestore collection "ShowAll".
+     */
+    private void fetchAllProducts() {
         firestore.collection("ShowAll")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                        if(task.isSuccessful()){
-                            for (DocumentSnapshot doc :task.getResult().getDocuments()){
-                                ShowAllModel showAllModel=doc.toObject(ShowAllModel.class);
-                                showAllModelList.add(showAllModel);
-                                showAllAdapter.notifyDataSetChanged();
-
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            showAllModelList.clear(); // Clear the list to avoid duplicates
+                            for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                if (showAllModel != null) {
+                                    showAllModelList.add(showAllModel);
+                                }
                             }
+                            showAllAdapter.notifyDataSetChanged();
                         }
                     }
                 });
+    }
 
-
+    /**
+     * Fetches products from the Firestore collection "ShowAll" based on the specified type.
+     *
+     * @param type The type of products to fetch.
+     */
+    private void fetchProductsByType(String type) {
+        firestore.collection("ShowAll")
+                .whereEqualTo("type", type)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            showAllModelList.clear(); // Clear the list to avoid duplicates
+                            for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                if (showAllModel != null) {
+                                    showAllModelList.add(showAllModel);
+                                }
+                            }
+                            showAllAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
     }
 }

@@ -1,6 +1,8 @@
 package com.example.kaizenarts.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.kaizenarts.R;
+import com.example.kaizenarts.activites.ShowAllActivity;
 import com.example.kaizenarts.models.CategoryModel;
 
 import java.util.List;
@@ -34,13 +37,22 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         CategoryModel category = list.get(position);
         if (context != null && category != null) {
             Glide.with(context)
                     .load(category.getImg_url())
                     .into(holder.catImg);
             holder.catName.setText(category.getName());
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context, ShowAllActivity.class);
+                    intent.putExtra("type",list.get(position).getType());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
