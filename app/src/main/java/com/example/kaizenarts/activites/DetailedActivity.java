@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -146,12 +148,22 @@ public class DetailedActivity extends AppCompatActivity {
         cartMap.put("currentTime",saveCurrentTime);
         cartMap.put("currentDate",saveCurrentDate);
 
-        firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
-                .collection("User").add(cartMap).addOnCompleteListener(task -> {
-                    Toast.makeText(DetailedActivity.this,"Added To Cart",Toast.LENGTH_SHORT).show();
-                    finish();
-
-                });
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+            firestore.collection("AddToCart").document(uid)
+                    .collection("User").add(cartMap)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(DetailedActivity.this, "Added To Cart", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(DetailedActivity.this, "Failed to Add To Cart", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Toast.makeText(DetailedActivity.this, "User not signed in", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
