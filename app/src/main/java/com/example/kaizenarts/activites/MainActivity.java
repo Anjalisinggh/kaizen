@@ -32,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         getSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
+        }
 
         homeFragment = new HomeFragment();
         loadFragment(homeFragment);
