@@ -28,9 +28,9 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login); // Ensure this refers to your login layout
 
         // Hide the action bar for a cleaner look
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
+       // if (getSupportActionBar() != null) {
+          //  getSupportActionBar().hide();
+       // }
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance();
