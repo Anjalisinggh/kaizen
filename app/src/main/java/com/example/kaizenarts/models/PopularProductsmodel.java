@@ -2,7 +2,7 @@ package com.example.kaizenarts.models;
 import java.io.Serializable;
 
 public class PopularProductsmodel implements Serializable {
-    private String description;
+     private String description;
     private String name;
     private String rating;
     private int price;

@@ -7,11 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".activites.ShowAllActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/show_all_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/pink"
+        android:minHeight="?attr/actionBarSize"
+        app:title="My Cart"
+        android:theme="?attr/actionBarTheme"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/show_all_toolbar"
         android:id="@+id/show_all_rec"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

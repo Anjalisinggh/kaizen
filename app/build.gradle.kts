@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.kaizenarts"
-        minSdk = 24
+        minSdk = 32
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -48,6 +48,8 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation ("com.google.android.material:material:1.9.0")
+    implementation ("com.google.android.gms:play-services-auth:20.5.0")
+
 
     implementation("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")

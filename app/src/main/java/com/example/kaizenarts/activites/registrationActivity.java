@@ -17,12 +17,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 
 public class registrationActivity extends AppCompatActivity {
 
     private EditText name, email, password;
     private FirebaseAuth auth;
-SharedPreferences sharedPreferences ;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,23 +50,23 @@ SharedPreferences sharedPreferences ;
         email = findViewById(R.id.et_email);
         password = findViewById(R.id.et_password);
 
-        sharedPreferences = getSharedPreferences("onBoardingScreen",MODE_PRIVATE);
-        boolean isFirstTime = sharedPreferences.getBoolean("firstTime",true);
+        sharedPreferences = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
+        boolean isFirstTime = sharedPreferences.getBoolean("firstTime", true);
 
-        if (isFirstTime){
-            SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.commit();
+        // If it's the first time, show the onboarding screen
+        if (isFirstTime) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("firstTime", false);  // Update the flag to false after onboarding
+            editor.apply();
 
-        Intent intent =new Intent(registrationActivity.this,onBoardingActivity.class);
-        startActivity(intent);
-        finish();
+            Intent intent = new Intent(registrationActivity.this, onBoardingActivity.class);
+            startActivity(intent);
+            finish(); // Close current activity
         }
-
     }
 
     // Sign-up method triggered by the button
-
-    public void signup(View view){
+    public void signup(View view) {
         String userName = name.getText().toString().trim();
         String userEmail = email.getText().toString().trim();
         String userPassword = password.getText().toString().trim();
@@ -104,9 +107,17 @@ SharedPreferences sharedPreferences ;
                             startActivity(new Intent(registrationActivity.this, MainActivity.class));
                             finish(); // Close current activity
                         } else {
-                            String errorMessage = task.getException() != null
-                                    ? task.getException().getMessage()
-                                    : "Unknown error occurred.";
+                            String errorMessage = task.getException() != null ? task.getException().getMessage() : "Unknown error occurred.";
+
+                            // Handling specific Firebase errors
+                            if (task.getException() instanceof FirebaseAuthWeakPasswordException) {
+                                errorMessage = "Password is too weak";
+                            } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                errorMessage = "Invalid email format";
+                            } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                errorMessage = "Email already in use";
+                            }
+
                             showToast("Registration failed: " + errorMessage);
                         }
                     }
@@ -114,16 +125,22 @@ SharedPreferences sharedPreferences ;
     }
 
     // Sign-in method triggered by the button
-    public void signin(View view){
+    public void signin(View view) {
         Intent intent = new Intent(registrationActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        finish();
-        // Close current activity
+        finish(); // Close current activity
     }
 
     // Helper method to show Toast messages
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    // Prevent users from navigating back to registration screen after successful registration
+    @Override
+    public void onBackPressed() {
+        // Do nothing or navigate to a specific screen (like MainActivity)
+        super.onBackPressed();
     }
 }

@@ -96,10 +96,14 @@ public class loginActivity extends AppCompatActivity {
     }
 
     // Redirect to Registration Activity
+
+
     public void signUp(View view) {
+        // Remove any check for onboarding, just navigate to the registration screen
         startActivity(new Intent(loginActivity.this, registrationActivity.class));
         finish(); // Close current activity
     }
+
 
     // Helper method to show Toast messages
     private void showToast(String message) {

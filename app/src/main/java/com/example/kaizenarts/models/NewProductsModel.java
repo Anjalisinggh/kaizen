@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class NewProductsModel implements Serializable {
 
-    String  description;
-    String name;
-    String rating;
-    int price;
-    String img_url;
+    private String  description;
+    private String name;
+    private String rating;
+    private int price;
+    private  String img_url;
 
     public NewProductsModel(){
 
