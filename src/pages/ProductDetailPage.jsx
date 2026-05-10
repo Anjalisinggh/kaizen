@@ -52,16 +52,15 @@ function ProductDetailPage({ slug }) {
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <PrimaryButton onClick={() => window.alert(`${product.name} added to your bag.`)}>
+              <PrimaryButton href={`#/cart/${product.slug}`}>
                 <FiShoppingBag className="mr-2" /> Add To Bag
               </PrimaryButton>
-              <button
-                type="button"
-                onClick={() => window.alert(`${product.name} added to your wishlist.`)}
+              <a
+                href="#/wishlist"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-sand/80 bg-white/70 px-6 text-sm font-bold text-espresso transition hover:-translate-y-0.5 hover:bg-espresso hover:text-white"
               >
                 <FaRegHeart /> Save
-              </button>
+              </a>
             </div>
 
             <div className="mt-8 grid gap-3 text-sm text-stone-700">

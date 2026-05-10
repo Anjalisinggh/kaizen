@@ -1,28 +1,42 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi'
 import { navLinks, sharedIcons } from '../../data/jewelryData'
 
 function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const GemIcon = sharedIcons.gem
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16)
+    onScroll()
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-2 pt-3 sm:px-4">
-      {/* Fixed top navbar */}
-      <nav className="mx-auto flex w-full max-w-[calc(100%-1rem)] items-center justify-between rounded-[1.7rem] bg-[#d6caba] px-5 py-4 shadow-[0_14px_45px_rgba(52,35,20,0.12)] sm:max-w-[calc(100%-2rem)] sm:px-7 lg:px-9">
+    <header className="fixed inset-x-0 top-5 z-50 px-4">
+      {/* Premium rounded navbar */}
+      <nav
+        className={`luxury-container flex items-center justify-between rounded-[1.6rem] border px-5 py-4 transition duration-300 sm:px-7 ${
+          scrolled
+            ? 'border-white/45 bg-[#8b6642]/70 shadow-[0_22px_70px_rgba(52,35,20,0.18)] backdrop-blur-xl'
+            : 'border-white/20 bg-[#8b6642]/34 shadow-[0_18px_55px_rgba(52,35,20,0.12)] backdrop-blur-md'
+        }`}
+      >
         <a href="#/" className="flex items-center gap-3 text-white drop-shadow-sm">
-          <span className="grid size-11 place-items-center rounded-full bg-white text-cocoa shadow-xl sm:size-13">
+          <span className="grid size-11 place-items-center rounded-full bg-white text-cocoa shadow-xl">
             <GemIcon className="text-xl" />
           </span>
-          <span className="font-serif text-3xl font-bold leading-none text-white sm:text-4xl">Kaizen Arts</span>
+          <span className="font-serif text-3xl font-bold leading-none text-white">Kaizen Arts</span>
         </a>
 
-        <div className="hidden items-center gap-3 rounded-full bg-white p-2 shadow-[0_18px_45px_rgba(37,23,11,0.12)] lg:flex">
+        <div className="hidden items-center gap-1 rounded-full bg-white p-2 shadow-[0_18px_45px_rgba(37,23,11,0.18)] lg:flex">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="inline-flex items-center gap-1 rounded-full px-6 py-3 text-sm font-bold text-espresso transition hover:bg-cream"
+              className="inline-flex items-center gap-1 rounded-full px-5 py-3 text-xs font-bold text-espresso transition hover:bg-cream"
             >
               {link.label}
               {link.label === 'Profile' && <FiChevronDown />}
@@ -30,7 +44,7 @@ function Navbar() {
           ))}
           <a
             href="mailto:concierge@kaizenarts.test"
-            className="rounded-full bg-cocoa px-8 py-3 text-sm font-bold text-white transition hover:bg-espresso"
+            className="rounded-full bg-cocoa px-7 py-3 text-xs font-bold text-white transition hover:bg-espresso"
           >
             Contact Us
           </a>
@@ -47,7 +61,7 @@ function Navbar() {
       </nav>
 
       {open && (
-        <div className="mx-auto mt-3 w-full max-w-[calc(100%-1rem)] rounded-[1.6rem] bg-white/95 p-4 shadow-2xl backdrop-blur-xl sm:max-w-[calc(100%-2rem)] lg:hidden">
+        <div className="luxury-container mt-3 rounded-[1.6rem] bg-white/95 p-4 shadow-2xl backdrop-blur-xl lg:hidden">
           {navLinks.map((link) => (
             <a
               key={link.label}

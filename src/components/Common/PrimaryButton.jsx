@@ -24,7 +24,7 @@ function PrimaryButton({ children, className = '', variant = 'dark', href, onCli
   return (
     <button
       type="button"
-      onClick={onClick || (() => window.alert('This action is ready to connect to your ecommerce backend.'))}
+      onClick={onClick}
       className={classes}
     >
       {content}

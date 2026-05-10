@@ -15,14 +15,13 @@ function VideoShowcase() {
             className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-espresso/18" />
-          <button
-            type="button"
+          <a
+            href="#/showcase"
             aria-label="Play jewelry showcase"
-            onClick={() => window.alert('Opening the jewelry showcase video preview.')}
             className="absolute left-1/2 top-1/2 grid size-17 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-cocoa shadow-[0_18px_45px_rgba(52,35,20,0.24)] transition duration-300 hover:scale-110 hover:bg-cream"
           >
             <FaPlay className="ml-1" />
-          </button>
+          </a>
         </FadeIn>
 
         <div>

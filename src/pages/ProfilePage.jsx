@@ -1,16 +1,25 @@
+import { useState } from 'react'
 import { FiEdit3, FiLogOut, FiPackage, FiTruck } from 'react-icons/fi'
 import FadeIn from '../components/Common/FadeIn'
 import PrimaryButton from '../components/Common/PrimaryButton'
 import ProductCard from '../components/Collection/ProductCard'
-import {
-  profileEssentials,
-  profileOrders,
-  profileStats,
-  profileUser,
-  profileWishlist,
-} from '../data/jewelryData'
+import { profileEssentials, profileOrders, profileStats, profileWishlist } from '../data/jewelryData'
+import { getProfile } from '../data/profileStorage'
 
 function ProfilePage() {
+  const [profile] = useState(() => getProfile())
+
+  const accountDetails = profileEssentials.map((item) => {
+    if (item.title !== 'Personal Details') {
+      return item
+    }
+
+    return {
+      ...item,
+      text: `${profile.name}, ${profile.email}, ${profile.phone}.`,
+    }
+  })
+
   return (
     <section className="px-4 pb-20 pt-32 sm:pb-28 sm:pt-36">
       {/* Ecommerce profile page */}
@@ -19,14 +28,14 @@ function ProfilePage() {
           <aside className="rounded-[2rem] bg-espresso p-6 text-white shadow-[0_28px_90px_rgba(52,35,20,0.2)] sm:p-8">
             <div className="flex items-center gap-4">
               <img
-                src={profileUser.avatar}
-                alt={profileUser.name}
+                src={profile.avatar}
+                alt={profile.name}
                 className="size-24 rounded-full border-4 border-white/25 object-cover shadow-2xl"
               />
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.28em] text-sand">{profileUser.tier}</p>
-                <h1 className="mt-2 font-serif text-4xl font-semibold leading-none">{profileUser.name}</h1>
-                <p className="mt-2 text-sm text-cream/70">{profileUser.joined}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-sand">{profile.tier}</p>
+                <h1 className="mt-2 font-serif text-4xl font-semibold leading-none">{profile.name}</h1>
+                <p className="mt-2 text-sm text-cream/70">{profile.joined}</p>
               </div>
             </div>
 
@@ -34,7 +43,7 @@ function ProfilePage() {
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.24em] text-sand">Reward Points</p>
-                  <p className="mt-2 font-serif text-5xl font-semibold">{profileUser.rewardPoints}</p>
+                  <p className="mt-2 font-serif text-5xl font-semibold">{profile.rewardPoints}</p>
                 </div>
                 <div className="grid size-14 place-items-center rounded-full bg-sand text-espresso">
                   <FiPackage className="text-2xl" />
@@ -43,29 +52,24 @@ function ProfilePage() {
               <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/15">
                 <div className="h-full w-3/4 rounded-full bg-sand" />
               </div>
-              <p className="mt-3 text-sm text-cream/70">{profileUser.nextReward}</p>
+              <p className="mt-3 text-sm text-cream/70">{profile.nextReward}</p>
             </div>
 
             <div className="mt-6 grid gap-3">
-              <p className="rounded-full bg-white/10 px-5 py-3 text-sm text-cream/80">{profileUser.email}</p>
-              <p className="rounded-full bg-white/10 px-5 py-3 text-sm text-cream/80">{profileUser.phone}</p>
+              <p className="rounded-full bg-white/10 px-5 py-3 text-sm text-cream/80">{profile.email}</p>
+              <p className="rounded-full bg-white/10 px-5 py-3 text-sm text-cream/80">{profile.phone}</p>
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col">
-              <PrimaryButton
-                variant="light"
-                className="w-full"
-                onClick={() => window.alert('Profile editor opened.')}
-              >
+              <PrimaryButton href="#/profile/edit" variant="light" className="w-full">
                 Edit Profile
               </PrimaryButton>
-              <button
-                type="button"
-                onClick={() => window.alert('Signed out of demo account.')}
+              <a
+                href="#/"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/15 px-6 text-sm font-bold text-white transition hover:bg-white hover:text-espresso"
               >
                 <FiLogOut /> Sign Out
-              </button>
+              </a>
             </div>
           </aside>
 
@@ -94,13 +98,12 @@ function ProfilePage() {
                   <p className="text-xs font-bold uppercase tracking-[0.28em] text-cocoa">Orders</p>
                   <h2 className="mt-2 font-serif text-4xl font-semibold text-espresso">Recent purchases</h2>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => window.alert('Tracking information opened for all recent orders.')}
+                <a
+                  href="#/orders"
                   className="inline-flex items-center gap-2 rounded-full bg-cream px-5 py-3 text-xs font-bold text-espresso transition hover:bg-espresso hover:text-white"
                 >
                   <FiTruck /> Track All
-                </button>
+                </a>
               </div>
 
               <div className="mt-6 space-y-4">
@@ -137,7 +140,7 @@ function ProfilePage() {
               <FiEdit3 className="hidden text-2xl text-cocoa sm:block" />
             </div>
             <div className="mt-7 grid gap-4 sm:grid-cols-2">
-              {profileEssentials.map((item) => {
+              {accountDetails.map((item) => {
                 const Icon = item.icon
 
                 return (
@@ -157,9 +160,12 @@ function ProfilePage() {
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-cocoa">Concierge Notes</p>
             <h2 className="mt-2 font-serif text-4xl font-semibold text-espresso">Saved preferences</h2>
             <div className="mt-6 space-y-3 text-sm leading-7 text-stone-700">
-              <p>Ring size: US 6.5 · Necklace length: 18 inches · Preferred metal: warm gold.</p>
-              <p>Gift wrapping enabled by default for anniversary and birthday orders.</p>
-              <p>Private preview notifications enabled for limited capsule releases.</p>
+              <p>
+                Ring size: {profile.ringSize} · Necklace length: {profile.necklaceLength} · Preferred metal:{' '}
+                {profile.preferredMetal}.
+              </p>
+              <p>Gift wrapping: {profile.giftWrapping} for anniversary and birthday orders.</p>
+              <p>Private preview notifications: {profile.previewNotifications} for limited capsule releases.</p>
             </div>
           </FadeIn>
         </div>

@@ -16,7 +16,9 @@ function ProductCard({ product }) {
         <button
           type="button"
           aria-label={`Save ${product.name}`}
-          onClick={() => window.alert(`${product.name} added to your wishlist.`)}
+          onClick={() => {
+            window.location.hash = '#/wishlist'
+          }}
           className="absolute right-3 top-3 z-20 grid size-9 place-items-center rounded-full bg-white/90 text-cocoa shadow-lg transition hover:bg-espresso hover:text-white"
         >
           <HeartIcon />

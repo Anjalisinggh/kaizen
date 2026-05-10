@@ -5,7 +5,12 @@ import PrimaryButton from '../components/Common/PrimaryButton'
 import SectionHeader from '../components/Common/SectionHeader'
 import ProductCard from '../components/Collection/ProductCard'
 
-function CollectionPage() {
+function CollectionPage({ categorySlug }) {
+  const selectedCategory = categories.find((category) => category.name.toLowerCase() === categorySlug)
+  const visibleProducts = selectedCategory
+    ? collectionItems.filter((product) => product.category.toLowerCase() === selectedCategory.name.toLowerCase())
+    : collectionItems
+
   return (
     <>
       <PageHero
@@ -27,8 +32,7 @@ function CollectionPage() {
               {categories.map((category) => (
                 <a
                   key={category.name}
-                  href="#/collections"
-                  onClick={() => window.alert(`Showing ${category.name} pieces.`)}
+                  href={`#/collections/${category.name.toLowerCase()}`}
                   className="rounded-full border border-sand/70 bg-ivory px-5 py-3 text-xs font-bold text-espresso transition hover:-translate-y-0.5 hover:bg-espresso hover:text-white"
                 >
                   {category.name}
@@ -38,7 +42,7 @@ function CollectionPage() {
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {collectionItems.map((product) => (
+            {visibleProducts.map((product) => (
               <ProductCard key={product.name} product={product} />
             ))}
           </div>
