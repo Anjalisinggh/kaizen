@@ -9,7 +9,7 @@ function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About Kaizen Arts"
+        eyebrow="About Utsav"
         title="Jewelry shaped by patience, light, and restraint."
         text="Our studio creates modern heirlooms with quiet silhouettes, warm materials, and the precision of traditional hand finishing."
         image={aboutImages.editorial}
@@ -35,7 +35,7 @@ function AboutPage() {
             <SectionHeader
               eyebrow="Our Atelier"
               title="An editorial approach to everyday heirlooms."
-              text="Kaizen Arts began with a simple idea: fine jewelry should feel intimate, wearable, and visually calm without losing its sense of occasion."
+              text="Utsav began with a simple idea: fine jewelry should feel intimate, wearable, and visually calm without losing its sense of occasion."
             />
             <FadeIn delay={0.12} className="mt-8 space-y-4">
               {atelierValues.map((value) => (

@@ -28,7 +28,7 @@ function Navbar() {
           <span className="grid size-11 place-items-center rounded-full bg-white text-cocoa shadow-xl">
             <GemIcon className="text-xl" />
           </span>
-          <span className="font-serif text-3xl font-bold leading-none text-white">Kaizen Arts</span>
+          <span className="font-serif text-3xl font-bold leading-none text-white">Utsav</span>
         </a>
 
         <div className="hidden items-center gap-1 rounded-full bg-white p-2 shadow-[0_18px_45px_rgba(37,23,11,0.18)] lg:flex">

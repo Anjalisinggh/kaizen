@@ -8,7 +8,7 @@ function Footer() {
       <div className="luxury-container">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.7fr_0.7fr_1fr]">
           <div>
-            <h2 className="font-serif text-4xl font-semibold text-white">Kaizen Arts</h2>
+            <h2 className="font-serif text-4xl font-semibold text-white">Utsav</h2>
             <p className="mt-5 max-w-sm text-sm leading-7 text-cream/70">
               Modern heirloom jewelry with warm metals, delicate stones, and polished editorial restraint.
             </p>
@@ -65,7 +65,7 @@ function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-cream/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Kaizen Arts. All rights reserved.</p>
+          <p>© 2026 Utsav. All rights reserved.</p>
           <p>Privacy Policy · Terms of Service</p>
         </div>
       </div>

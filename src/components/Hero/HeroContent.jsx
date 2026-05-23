@@ -27,7 +27,7 @@ function HeroContent() {
             <span className="grid size-11 place-items-center rounded-full bg-white text-cocoa shadow-xl">
               <GemIcon className="text-xl" />
             </span>
-            <span className="font-serif text-3xl font-bold leading-none text-white drop-shadow-sm">Kaizen Arts</span>
+            <span className="font-serif text-3xl font-bold leading-none text-white drop-shadow-sm">Utsav</span>
           </a>
 
           <div className="hidden items-center gap-1 rounded-full bg-white p-2 shadow-[0_18px_45px_rgba(37,23,11,0.22)] lg:flex">
@@ -73,7 +73,7 @@ function HeroContent() {
             </div>
 
             <div className="mt-8 max-w-sm">
-              <p className="text-sm font-bold text-white">/ Kaizen Arts Jewelry Store</p>
+              <p className="text-sm font-bold text-white">/ Utsav Jewelry Store</p>
               <p className="mt-4 text-sm leading-7 text-white/78">
                 Refined gold, luminous stones, and heirloom silhouettes designed for everyday ceremony.
               </p>

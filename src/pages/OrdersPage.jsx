@@ -30,7 +30,7 @@ function OrdersPage() {
                     <FiTruck className="text-cocoa" /> {order.status}
                   </div>
                   <div className="mt-4 space-y-3 text-sm text-stone-600">
-                    <p className="flex gap-3"><FiPackage className="mt-1 text-cocoa" /> Packed by Kaizen Arts atelier.</p>
+                    <p className="flex gap-3"><FiPackage className="mt-1 text-cocoa" /> Packed by Utsav atelier.</p>
                     <p className="flex gap-3"><FiMapPin className="mt-1 text-cocoa" /> Delivery estimate: 2-3 business days.</p>
                   </div>
                 </div>

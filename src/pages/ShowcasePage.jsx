@@ -12,7 +12,7 @@ function ShowcasePage() {
           <p className="text-xs font-bold uppercase tracking-[0.28em] text-cocoa">Video Showcase</p>
           <h1 className="mt-3 font-serif text-6xl font-semibold leading-none text-espresso">The golden hour edit</h1>
           <p className="mt-5 max-w-xl text-sm leading-7 text-stone-600">
-            A styled preview of Kaizen Arts pieces in motion, paired with shoppable selections from the shoot.
+            A styled preview of Utsav pieces in motion, paired with shoppable selections from the shoot.
           </p>
         </FadeIn>
 
