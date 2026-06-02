@@ -1,9 +1,30 @@
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { FiArrowRight, FiChevronDown } from 'react-icons/fi'
 import { heroImages, navLinks, sharedIcons } from '../../data/jewelryData'
+import { api } from '../../lib/api'
 
 function HeroContent() {
   const GemIcon = sharedIcons.gem
+  const [community, setCommunity] = useState({ totalUsers: 230000, avatars: [] })
+
+  useEffect(() => {
+    let isMounted = true
+
+    api.getHeroCommunity()
+      .then((data) => {
+        if (!isMounted || !data) return
+        setCommunity({
+          totalUsers: data.totalUsers || 0,
+          avatars: data.avatars || [],
+        })
+      })
+      .catch(() => {})
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden bg-espresso px-4 py-6 sm:py-8">
@@ -56,24 +77,21 @@ function HeroContent() {
               Our Luxury Collections
             </h1>
 
-            <div className="mt-9 flex items-center gap-4">
-              <a
-                href="#/collections"
-                className="rounded-full bg-white px-8 py-4 text-sm font-bold text-espresso shadow-[0_18px_45px_rgba(37,23,11,0.18)] transition hover:-translate-y-0.5 hover:bg-ivory"
-              >
-                Let&apos;s Get Started
-              </a>
+            <div className="mt-4">
               <a
                 href="#/collections"
                 aria-label="Open collections"
-                className="grid size-14 place-items-center rounded-full bg-white text-2xl text-espresso shadow-[0_18px_45px_rgba(37,23,11,0.18)] transition hover:-translate-y-0.5 hover:bg-ivory"
+                className="inline-flex items-center gap-3 rounded-full bg-white px-7 py-2 text-sm font-bold text-espresso shadow-[0_18px_45px_rgba(37,23,11,0.18)] transition hover:-translate-y-0.5 hover:bg-ivory"
               >
-                <FiArrowRight />
+                <span>Let&apos;s Get Started</span>
+                <span className="grid size-10 place-items-center rounded-full  text-xl">
+                  <FiArrowRight />
+                </span>
               </a>
             </div>
 
             <div className="mt-8 max-w-sm">
-              <p className="text-sm font-bold text-white">/ Utsav Jewelry Store</p>
+             
               <p className="mt-4 text-sm leading-7 text-white/78">
                 Refined gold, luminous stones, and heirloom silhouettes designed for everyday ceremony.
               </p>
@@ -82,16 +100,17 @@ function HeroContent() {
 
           <div className="relative min-h-[24rem] lg:min-h-[31rem]">
             <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute right-0 top-16 flex items-center gap-6 text-white sm:right-8 lg:right-4"
+              className="absolute right-0 top-60 flex items-center gap-6 text-white sm:right-8 lg:right-4"
             >
               <div className="flex -space-x-3 rounded-full bg-white/28 p-1.5 backdrop-blur-md">
-                {[1, 2, 3].map((item) => (
+                {(community.avatars.length > 0
+                  ? community.avatars
+                  : [1, 2, 3].map((item) => ({ avatar: `https://i.pravatar.cc/80?img=${item + 23}`, name: 'Happy client' }))
+                ).map((item) => (
                   <img
-                    key={item}
-                    src={`https://i.pravatar.cc/80?img=${item + 23}`}
-                    alt="Happy client"
+                    key={item.avatar}
+                    src={item.avatar}
+                    alt={item.name || 'Happy client'}
                     className="size-12 rounded-full border-2 border-white object-cover"
                   />
                 ))}
@@ -100,16 +119,14 @@ function HeroContent() {
                 </span>
               </div>
               <div>
-                <p className="font-serif text-4xl font-bold leading-none">230K</p>
+               <p className="font-serif text-4xl font-bold leading-none">230K</p>
                 <p className="mt-1 text-sm font-semibold text-white/78">Happy Clients</p>
               </div>
             </motion.div>
 
             <motion.a
               href="#/product/gold-necklace"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute bottom-8 right-0 grid w-full max-w-[26rem] grid-cols-[9rem_1fr_auto] items-center gap-4 rounded-[1.35rem] bg-white p-4 text-espresso shadow-[0_22px_65px_rgba(37,23,11,0.24)] transition hover:-translate-y-1 sm:right-4"
+              className="absolute bottom-8 right-0 grid w-full max-w-[26rem] grid-cols-[9rem_1fr_auto] items-center gap-4 rounded-[1.35rem] bg-white p-4 text-espresso shadow-[0_22px_65px_rgba(37,23,11,0.24)] sm:right-4"
             >
               <img src={heroImages.detail} alt="Gold bracelet detail" className="h-24 w-36 rounded-2xl object-cover" />
               <div>

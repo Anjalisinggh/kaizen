@@ -1,4 +1,4 @@
-function PrimaryButton({ children, className = '', variant = 'dark', href, onClick }) {
+function PrimaryButton({ children, className = '', variant = 'dark', href, onClick, type = 'button' }) {
   const styles =
     variant === 'light'
       ? 'bg-white text-espresso shadow-[0_16px_36px_rgba(52,35,20,0.18)] hover:bg-ivory'
@@ -23,7 +23,7 @@ function PrimaryButton({ children, className = '', variant = 'dark', href, onCli
 
   return (
     <button
-      type="button"
+      type={type}
       onClick={onClick}
       className={classes}
     >

@@ -1,15 +1,52 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { FiEdit3, FiLogOut, FiPackage, FiTruck } from 'react-icons/fi'
+import { IoBagCheckOutline } from 'react-icons/io5'
+import { FaRegHeart } from 'react-icons/fa'
+import { PiSparkleFill } from 'react-icons/pi'
 import FadeIn from '../components/Common/FadeIn'
 import PrimaryButton from '../components/Common/PrimaryButton'
 import ProductCard from '../components/Collection/ProductCard'
-import { profileEssentials, profileOrders, profileStats, profileWishlist } from '../data/jewelryData'
-import { getProfile } from '../data/profileStorage'
+import { profileEssentials } from '../data/jewelryData'
+import { defaultProfile } from '../data/profileStorage'
+import { api } from '../lib/api'
 
 function ProfilePage() {
-  const [profile] = useState(() => getProfile())
+  const [profile, setProfile] = useState(defaultProfile)
+  const [orders, setOrders] = useState([])
+  const [wishlist, setWishlist] = useState([])
+  const [stats, setStats] = useState([
+    { label: 'Orders', value: '0', icon: IoBagCheckOutline },
+    { label: 'Wishlist', value: '0', icon: FaRegHeart },
+    { label: 'Rewards', value: '0', icon: PiSparkleFill },
+  ])
+  const [isLoading, setIsLoading] = useState(true)
 
-  const accountDetails = profileEssentials.map((item) => {
+  useEffect(() => {
+    let isMounted = true
+
+    api.getPublicProfile()
+      .then((data) => {
+        if (!isMounted || !data) return
+        setProfile((current) => ({ ...current, ...data }))
+        setOrders(data.orders || [])
+        setWishlist(data.wishlist || [])
+        setStats([
+          { label: 'Orders', value: String(data.stats?.orders || 0), icon: IoBagCheckOutline },
+          { label: 'Wishlist', value: String(data.stats?.wishlist || 0), icon: FaRegHeart },
+          { label: 'Rewards', value: String(data.stats?.rewards || 0), icon: PiSparkleFill },
+        ])
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (isMounted) setIsLoading(false)
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const accountDetails = useMemo(() => profileEssentials.map((item) => {
     if (item.title !== 'Personal Details') {
       return item
     }
@@ -18,7 +55,7 @@ function ProfilePage() {
       ...item,
       text: `${profile.name}, ${profile.email}, ${profile.phone}.`,
     }
-  })
+  }), [profile])
 
   return (
     <section className="px-4 pb-20 pt-32 sm:pb-28 sm:pt-36">
@@ -43,7 +80,7 @@ function ProfilePage() {
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.24em] text-sand">Reward Points</p>
-                  <p className="mt-2 font-serif text-5xl font-semibold">{profile.rewardPoints}</p>
+                  <p className="mt-2 font-serif text-5xl font-semibold">{Number(profile.rewardPoints || 0).toLocaleString()}</p>
                 </div>
                 <div className="grid size-14 place-items-center rounded-full bg-sand text-espresso">
                   <FiPackage className="text-2xl" />
@@ -75,7 +112,7 @@ function ProfilePage() {
 
           <div className="grid gap-6">
             <div className="grid gap-4 sm:grid-cols-3">
-              {profileStats.map((stat, index) => {
+              {stats.map((stat, index) => {
                 const Icon = stat.icon
 
                 return (
@@ -107,7 +144,7 @@ function ProfilePage() {
               </div>
 
               <div className="mt-6 space-y-4">
-                {profileOrders.map((order) => (
+                {(orders.length > 0 ? orders : []).map((order) => (
                   <a
                     key={order.id}
                     href={`#/product/${order.slug}`}
@@ -164,7 +201,7 @@ function ProfilePage() {
                 Ring size: {profile.ringSize} · Necklace length: {profile.necklaceLength} · Preferred metal:{' '}
                 {profile.preferredMetal}.
               </p>
-              <p>Gift wrapping: {profile.giftWrapping} for anniversary and birthday orders.</p>
+              <p>Gift wrapping: {profile.giftWrapping || 'Disabled'} for anniversary and birthday orders.</p>
               <p>Private preview notifications: {profile.previewNotifications} for limited capsule releases.</p>
             </div>
           </FadeIn>
@@ -182,10 +219,13 @@ function ProfilePage() {
             </a>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {profileWishlist.map((product) => (
+            {(wishlist.length > 0 ? wishlist : []).map((product) => (
               <ProductCard key={product.name} product={product} />
             ))}
           </div>
+          {!isLoading && wishlist.length === 0 && (
+            <p className="mt-6 text-sm text-stone-600">No wishlist items yet.</p>
+          )}
         </section>
       </div>
     </section>

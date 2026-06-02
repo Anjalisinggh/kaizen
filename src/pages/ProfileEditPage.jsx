@@ -1,10 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import FadeIn from '../components/Common/FadeIn'
 import PrimaryButton from '../components/Common/PrimaryButton'
-import { getProfile, saveProfile } from '../data/profileStorage'
+import { defaultProfile } from '../data/profileStorage'
+import { api } from '../lib/api'
 
 function ProfileEditPage() {
-  const [profile, setProfile] = useState(() => getProfile())
+  const [profile, setProfile] = useState(defaultProfile)
+  const [isSaving, setIsSaving] = useState(false)
+
+  useEffect(() => {
+    let isMounted = true
+
+    api.getPublicProfile()
+      .then((data) => {
+        if (isMounted && data) setProfile((current) => ({ ...current, ...data }))
+      })
+      .catch(() => {})
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   const fields = [
     ['Full name', 'name'],
@@ -21,9 +37,17 @@ function ProfileEditPage() {
     setProfile((currentProfile) => ({ ...currentProfile, [key]: value }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    saveProfile(profile)
+    if (!profile.id || isSaving) return
+
+    setIsSaving(true)
+    try {
+      await api.updatePublicProfile(profile.id, profile)
+    } catch {
+      setIsSaving(false)
+      return
+    }
     window.location.hash = '#/profile'
   }
 
@@ -51,7 +75,7 @@ function ProfileEditPage() {
             ))}
           </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <PrimaryButton>Save Changes</PrimaryButton>
+            <PrimaryButton type="submit">{isSaving ? 'Saving...' : 'Save Changes'}</PrimaryButton>
             <a href="#/profile" className="inline-flex min-h-12 items-center justify-center rounded-full border border-sand/80 px-6 text-sm font-bold text-espresso hover:bg-cream">
               Cancel
             </a>
