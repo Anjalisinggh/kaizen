@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { FiArrowRight, FiChevronDown } from 'react-icons/fi'
+import { FiArrowRight } from 'react-icons/fi'
 import { heroImages, navLinks, sharedIcons } from '../../data/jewelryData'
 import { api } from '../../lib/api'
 
@@ -59,7 +59,6 @@ function HeroContent() {
                 className="inline-flex items-center gap-1 rounded-full px-5 py-3 text-xs font-bold text-espresso transition hover:bg-cream"
               >
                 {link.label}
-                {link.label === 'Profile' && <FiChevronDown />}
               </a>
             ))}
             <a

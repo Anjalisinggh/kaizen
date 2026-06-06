@@ -1,26 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import FadeIn from '../components/Common/FadeIn'
 import PrimaryButton from '../components/Common/PrimaryButton'
-import { defaultProfile } from '../data/profileStorage'
-import { api } from '../lib/api'
+import { getSavedProfile, saveProfile } from '../lib/storefrontState'
 
 function ProfileEditPage() {
-  const [profile, setProfile] = useState(defaultProfile)
+  const [profile, setProfile] = useState(() => getSavedProfile())
   const [isSaving, setIsSaving] = useState(false)
-
-  useEffect(() => {
-    let isMounted = true
-
-    api.getPublicProfile()
-      .then((data) => {
-        if (isMounted && data) setProfile((current) => ({ ...current, ...data }))
-      })
-      .catch(() => {})
-
-    return () => {
-      isMounted = false
-    }
-  }, [])
 
   const fields = [
     ['Full name', 'name'],
@@ -39,15 +24,10 @@ function ProfileEditPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    if (!profile.id || isSaving) return
+    if (isSaving) return
 
     setIsSaving(true)
-    try {
-      await api.updatePublicProfile(profile.id, profile)
-    } catch {
-      setIsSaving(false)
-      return
-    }
+    saveProfile(profile)
     window.location.hash = '#/profile'
   }
 

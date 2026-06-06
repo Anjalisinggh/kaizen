@@ -19,4 +19,5 @@ export const api = {
   getPublicProfile: () => request('/public/profile'),
   updatePublicProfile: (id, profile) => request(`/public/profile/${id}`, { method: 'PATCH', body: JSON.stringify(profile) }),
   getHeroCommunity: () => request('/public/hero-community'),
+  subscribeNewsletter: (email) => request('/newsletter', { method: 'POST', body: JSON.stringify({ email }) }),
 };

@@ -1,8 +1,16 @@
+import { useEffect, useState } from 'react'
 import { sharedIcons } from '../../data/jewelryData'
+import { isWishlisted, subscribeStore, toggleWishlist } from '../../lib/storefrontState'
 
 function ProductCard({ product }) {
   const HeartIcon = sharedIcons.heart
   const productUrl = `#/product/${product.slug}`
+  const [saved, setSaved] = useState(() => isWishlisted(product.slug))
+
+  useEffect(() => {
+    const syncSavedState = () => setSaved(isWishlisted(product.slug))
+    return subscribeStore(syncSavedState)
+  }, [product.slug])
 
   return (
     <article className="group relative min-w-0 rounded-[1.5rem] bg-white p-3 shadow-[0_18px_50px_rgba(80,52,25,0.1)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_24px_70px_rgba(80,52,25,0.18)]">
@@ -15,11 +23,16 @@ function ProductCard({ product }) {
         />
         <button
           type="button"
-          aria-label={`Save ${product.name}`}
-          onClick={() => {
-            window.location.hash = '#/wishlist'
+          aria-label={`${saved ? 'Remove' : 'Save'} ${product.name}`}
+          aria-pressed={saved}
+          onClick={(event) => {
+            event.preventDefault()
+            event.stopPropagation()
+            setSaved(toggleWishlist(product.slug))
           }}
-          className="absolute right-3 top-3 z-20 grid size-9 place-items-center rounded-full bg-white/90 text-cocoa shadow-lg transition hover:bg-espresso hover:text-white"
+          className={`absolute right-3 top-3 z-20 grid size-9 place-items-center rounded-full shadow-lg transition hover:bg-espresso hover:text-white ${
+            saved ? 'bg-espresso text-white' : 'bg-white/90 text-cocoa'
+          }`}
         >
           <HeartIcon />
         </button>

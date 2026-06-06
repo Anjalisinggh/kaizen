@@ -1,13 +1,26 @@
+import { useEffect, useState } from 'react'
 import { FaRegHeart, FaShieldAlt, FaStar } from 'react-icons/fa'
 import { FiShoppingBag, FiTruck } from 'react-icons/fi'
 import FadeIn from '../components/Common/FadeIn'
 import PrimaryButton from '../components/Common/PrimaryButton'
 import ProductCard from '../components/Collection/ProductCard'
 import { collectionItems } from '../data/jewelryData'
+import { addToCart, isWishlisted, subscribeStore, toggleWishlist } from '../lib/storefrontState'
 
 function ProductDetailPage({ slug }) {
   const product = collectionItems.find((item) => item.slug === slug) || collectionItems[0]
   const relatedProducts = collectionItems.filter((item) => item.slug !== product.slug).slice(0, 3)
+  const [saved, setSaved] = useState(() => isWishlisted(product.slug))
+
+  useEffect(() => {
+    const syncSavedState = () => setSaved(isWishlisted(product.slug))
+    return subscribeStore(syncSavedState)
+  }, [product.slug])
+
+  const handleAddToCart = () => {
+    addToCart(product.slug)
+    window.location.hash = '#/cart'
+  }
 
   return (
     <section className="px-4 pb-20 pt-32 sm:pb-28 sm:pt-36">
@@ -52,15 +65,19 @@ function ProductDetailPage({ slug }) {
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <PrimaryButton href={`#/cart/${product.slug}`}>
+              <PrimaryButton onClick={handleAddToCart}>
                 <FiShoppingBag className="mr-2" /> Add To Bag
               </PrimaryButton>
-              <a
-                href="#/wishlist"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-sand/80 bg-white/70 px-6 text-sm font-bold text-espresso transition hover:-translate-y-0.5 hover:bg-espresso hover:text-white"
+              <button
+                type="button"
+                aria-pressed={saved}
+                onClick={() => setSaved(toggleWishlist(product.slug))}
+                className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-sand/80 px-6 text-sm font-bold transition hover:-translate-y-0.5 hover:bg-espresso hover:text-white ${
+                  saved ? 'bg-espresso text-white' : 'bg-white/70 text-espresso'
+                }`}
               >
-                <FaRegHeart /> Save
-              </a>
+                <FaRegHeart /> {saved ? 'Saved' : 'Save'}
+              </button>
             </div>
 
             <div className="mt-8 grid gap-3 text-sm text-stone-700">

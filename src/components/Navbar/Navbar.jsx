@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi'
+import { FiMenu, FiX } from 'react-icons/fi'
 import { navLinks, sharedIcons } from '../../data/jewelryData'
 
 function Navbar() {
@@ -39,7 +39,6 @@ function Navbar() {
               className="inline-flex items-center gap-1 rounded-full px-5 py-3 text-xs font-bold text-espresso transition hover:bg-cream"
             >
               {link.label}
-              {link.label === 'Profile' && <FiChevronDown />}
             </a>
           ))}
           <a

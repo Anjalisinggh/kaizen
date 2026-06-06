@@ -52,14 +52,14 @@ function CollectionPage({ categorySlug }) {
       <section className="pb-20 sm:pb-28">
         {/* Collection page featured drop */}
         <div className="luxury-container grid overflow-hidden rounded-[2rem] bg-espresso text-white shadow-[0_28px_90px_rgba(52,35,20,0.2)] lg:grid-cols-[1fr_0.9fr]">
-          <FadeIn className="p-8 sm:p-12">
+          <FadeIn className="flex min-h-full flex-col justify-between p-8 sm:p-12">
             <SectionHeader
               eyebrow="Limited Drop"
               title="The golden hour capsule."
               text="Warm-toned pieces designed to be worn together: brushed cuffs, fine chain necklaces, and softly reflective rings."
               tone="light"
             />
-            <PrimaryButton href="#/product/gold-necklace" className="mt-8" variant="light">
+            <PrimaryButton href="#/product/gold-necklace" className="self-start" variant="light">
               Reserve Pieces
             </PrimaryButton>
           </FadeIn>

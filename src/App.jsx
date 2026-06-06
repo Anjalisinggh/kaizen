@@ -19,6 +19,7 @@ const routes = {
   '#/profile': ProfilePage,
   '#/profile/edit': ProfileEditPage,
   '#/wishlist': WishlistPage,
+  '#/cart': CartPage,
   '#/orders': OrdersPage,
   '#/showcase': ShowcasePage,
   '#/checkout': CheckoutPage,
@@ -44,10 +45,11 @@ function App() {
   const productMatch = route.match(/^#\/product\/(.+)$/)
   const cartMatch = route.match(/^#\/cart\/(.+)$/)
   const collectionCategoryMatch = route.match(/^#\/collections\/(.+)$/)
+  const isRoutedPage = Boolean(routes[route] || productMatch || cartMatch || collectionCategoryMatch)
   const ActivePage = routes[route] || HomePage
 
   return (
-    <MainLayout hideNavbar={route === '#/'}>
+    <MainLayout hideNavbar={route === '#/' || !isRoutedPage}>
       {productMatch && <ProductDetailPage slug={productMatch[1]} />}
       {cartMatch && <CartPage slug={cartMatch[1]} />}
       {collectionCategoryMatch && <CollectionPage categorySlug={collectionCategoryMatch[1]} />}

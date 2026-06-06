@@ -1,18 +1,17 @@
 import {
-  FaFacebookF,
   FaGem,
   FaInstagram,
   FaMapMarkerAlt,
   FaRegCreditCard,
-  FaPinterestP,
   FaRegHeart,
   FaShippingFast,
   FaShieldAlt,
   FaStar,
-  FaTiktok,
+  FaStore,
 } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 import { GiDiamondRing, GiEarrings, GiNecklaceDisplay } from 'react-icons/gi'
-import { IoBagCheckOutline, IoGiftOutline, IoPersonOutline, IoSettingsOutline } from 'react-icons/io5'
+import { IoGiftOutline, IoPersonOutline, IoSettingsOutline } from 'react-icons/io5'
 import { PiSparkleFill } from 'react-icons/pi'
 
 export const navLinks = [
@@ -163,60 +162,10 @@ export const categories = [
 export const brandLogos = ['MAISON LUNE', 'AURELIA', 'NOIRGOLD', 'VELVET GEM', 'OPAL & CO']
 
 export const socialLinks = [
-  { label: 'Instagram', icon: FaInstagram },
-  { label: 'Pinterest', icon: FaPinterestP },
-  { label: 'Facebook', icon: FaFacebookF },
-  { label: 'TikTok', icon: FaTiktok },
+  { label: 'Instagram', icon: FaInstagram, href: 'https://www.instagram.com/jewelbizzz/' },
+  { label: 'X', icon: FaXTwitter, href: 'https://x.com/Its_Utsavv' },
+  { label: 'Meesho', icon: FaStore, href: 'https://www.meesho.com/Utsavv?_ms=3.0.1' },
 ]
-
-export const profileUser = {
-  name: 'Sophia Laurent',
-  tier: 'Gold Muse Member',
-  email: 'sophia.laurent@example.com',
-  phone: '+1 (212) 555-0184',
-  avatar: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=85',
-  joined: 'Member since 2024',
-  rewardPoints: '3,840',
-  nextReward: '$160 away from Platinum status',
-}
-
-export const profileStats = [
-  { label: 'Orders', value: '12', icon: IoBagCheckOutline },
-  { label: 'Wishlist', value: '18', icon: FaRegHeart },
-  { label: 'Rewards', value: '3.8K', icon: PiSparkleFill },
-]
-
-export const profileOrders = [
-  {
-    id: '#SHM-2048',
-    slug: 'diamond-ring',
-    item: 'Diamond Ring',
-    date: 'Apr 28, 2026',
-    status: 'In Transit',
-    total: '$540.00',
-    image: collectionItems[1].image,
-  },
-  {
-    id: '#SHM-1986',
-    slug: 'gold-necklace',
-    item: 'Gold Necklace',
-    date: 'Mar 16, 2026',
-    status: 'Delivered',
-    total: '$420.00',
-    image: collectionItems[2].image,
-  },
-  {
-    id: '#SHM-1842',
-    slug: 'pearl-bracelet',
-    item: 'Pearl Bracelet',
-    date: 'Jan 09, 2026',
-    status: 'Delivered',
-    total: '$310.00',
-    image: collectionItems[3].image,
-  },
-]
-
-export const profileWishlist = [collectionItems[0], collectionItems[4], collectionItems[5]]
 
 export const profileEssentials = [
   {
@@ -226,12 +175,12 @@ export const profileEssentials = [
   },
   {
     title: 'Shipping Address',
-    text: '120 Madison Avenue, Apartment 8B, New York, NY 10016.',
+    text: 'Add your preferred shipping address during checkout.',
     icon: FaMapMarkerAlt,
   },
   {
     title: 'Payment Method',
-    text: 'Visa ending in 2842. Billing address matches primary shipping.',
+    text: 'Payment details are entered securely at checkout.',
     icon: FaRegCreditCard,
   },
   {
