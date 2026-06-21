@@ -45,7 +45,7 @@ function HeroContent() {
         className="luxury-container relative flex h-full flex-col rounded-[2rem] border border-white/16 bg-white/[0.06] px-4 py-4 text-white shadow-[0_24px_90px_rgba(37,23,11,0.22)] backdrop-blur-[2px] sm:min-h-[calc(100vh-3rem)] sm:px-7 sm:py-7 lg:px-8"
       >
         <div className="relative flex shrink-0 items-center justify-between gap-4">
-          <a href="#/" className="flex items-center gap-2.5 sm:gap-3">
+          <a href="/" className="flex items-center gap-2.5 sm:gap-3">
             <span className="grid size-10 place-items-center rounded-full bg-white text-cocoa shadow-xl sm:size-11">
               <GemIcon className="text-lg sm:text-xl" />
             </span>
@@ -116,7 +116,7 @@ function HeroContent() {
                   Refined gold, luminous stones, and heirloom silhouettes designed for everyday ceremony.
                 </p>
                 <a
-                  href="#/collections"
+                  href="/collections"
                   aria-label="Open collections"
                   className="inline-flex w-fit items-center gap-3 rounded-full bg-white px-7 py-2 text-sm font-bold text-espresso shadow-[0_18px_45px_rgba(37,23,11,0.18)] transition hover:-translate-y-0.5 hover:bg-ivory sm:mt-4"
                 >
@@ -128,7 +128,7 @@ function HeroContent() {
               </div>
 
               <motion.a
-                href="#/product/gold-necklace"
+                href="/product/gold-necklace"
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
@@ -177,7 +177,7 @@ function HeroContent() {
             </motion.div>
 
             <motion.a
-              href="#/product/gold-necklace"
+              href="/product/gold-necklace"
               className="absolute bottom-8 right-0 grid w-full max-w-[26rem] grid-cols-[9rem_1fr_auto] items-center gap-4 rounded-[1.35rem] bg-white p-4 text-espresso shadow-[0_22px_65px_rgba(37,23,11,0.24)] sm:right-4"
             >
               <img src={heroImages.detail} alt="Gold bracelet detail" className="h-24 w-36 rounded-2xl object-cover" />

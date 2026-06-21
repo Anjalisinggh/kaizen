@@ -24,7 +24,7 @@ function Navbar() {
             : 'border-white/20 bg-[#8b6642]/34 shadow-[0_18px_55px_rgba(52,35,20,0.12)] backdrop-blur-md'
         }`}
       >
-        <a href="#/" className="flex items-center gap-3 text-white drop-shadow-sm">
+        <a href="/" className="flex items-center gap-3 text-white drop-shadow-sm">
           <span className="grid size-11 place-items-center rounded-full bg-white text-cocoa shadow-xl">
             <GemIcon className="text-xl" />
           </span>

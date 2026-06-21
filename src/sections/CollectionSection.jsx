@@ -17,7 +17,7 @@ function CollectionSection() {
             <p className="mt-5 text-sm leading-7 text-stone-600">
               A curated edit of rings, necklaces, and earrings shaped for modern heirloom dressing.
             </p>
-            <PrimaryButton href="#/collections" className="mt-7">See More</PrimaryButton>
+            <PrimaryButton href="/collections" className="mt-7">See More</PrimaryButton>
           </FadeIn>
 
           <div className="grid gap-5 md:grid-cols-3">

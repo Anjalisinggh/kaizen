@@ -32,7 +32,7 @@ function CollectionPage({ categorySlug }) {
               {categories.map((category) => (
                 <a
                   key={category.name}
-                  href={`#/collections/${category.name.toLowerCase()}`}
+                  href={`/collections/${category.name.toLowerCase()}`}
                   className="rounded-full border border-sand/70 bg-ivory px-5 py-3 text-xs font-bold text-espresso transition hover:-translate-y-0.5 hover:bg-espresso hover:text-white"
                 >
                   {category.name}
@@ -59,7 +59,7 @@ function CollectionPage({ categorySlug }) {
               text="Warm-toned pieces designed to be worn together: brushed cuffs, fine chain necklaces, and softly reflective rings."
               tone="light"
             />
-            <PrimaryButton href="#/product/gold-necklace" className="self-start" variant="light">
+            <PrimaryButton href="/product/gold-necklace" className="self-start" variant="light">
               Reserve Pieces
             </PrimaryButton>
           </FadeIn>

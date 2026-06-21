@@ -3,6 +3,7 @@ import { FiLock } from 'react-icons/fi'
 import FadeIn from '../components/Common/FadeIn'
 import PrimaryButton from '../components/Common/PrimaryButton'
 import { createOrder, getCartItems, getCartTotal, formatPrice, subscribeStore } from '../lib/storefrontState'
+import { navigate } from '../lib/navigation'
 
 function CheckoutPage() {
   const [cartItems, setCartItems] = useState(() => getCartItems())
@@ -40,7 +41,7 @@ function CheckoutPage() {
     }
 
     const order = createOrder(form)
-    if (order) window.location.hash = '#/orders'
+    if (order) navigate('/orders')
   }
 
   return (

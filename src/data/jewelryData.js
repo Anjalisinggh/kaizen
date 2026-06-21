@@ -15,10 +15,10 @@ import { IoGiftOutline, IoPersonOutline, IoSettingsOutline } from 'react-icons/i
 import { PiSparkleFill } from 'react-icons/pi'
 
 export const navLinks = [
-  { label: 'Home', href: '#/' },
-  { label: 'About Us', href: '#/about' },
-  { label: 'Collections', href: '#/collections' },
-  { label: 'Profile', href: '#/profile' },
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Collections', href: '/collections' },
+  { label: 'Profile', href: '/profile' },
 ]
 
 export const heroImages = {

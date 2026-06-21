@@ -42,7 +42,7 @@ function Footer() {
                 return (
                   <a
                     key={social.label}
-                    href={social.href || '#/'}
+                    href={social.href || '/'}
                     {...(social.href ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     aria-label={social.label}
                     className="grid size-10 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-sand hover:text-espresso"
@@ -57,7 +57,7 @@ function Footer() {
           <div>
             <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-white">Explore</h3>
             {['Collections', 'New Arrivals', 'Editorial', 'Gift Cards'].map((item) => (
-              <a key={item} href="#/collections" className="mb-3 block text-sm text-cream/70 transition hover:text-white">
+              <a key={item} href="/collections" className="mb-3 block text-sm text-cream/70 transition hover:text-white">
                 {item}
               </a>
             ))}
@@ -66,7 +66,7 @@ function Footer() {
           <div>
             <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-white">Care</h3>
             {['Sizing Guide', 'Shipping', 'Returns', 'Materials'].map((item) => (
-              <a key={item} href="#/about" className="mb-3 block text-sm text-cream/70 transition hover:text-white">
+              <a key={item} href="/about" className="mb-3 block text-sm text-cream/70 transition hover:text-white">
                 {item}
               </a>
             ))}

@@ -6,6 +6,7 @@ import PrimaryButton from '../components/Common/PrimaryButton'
 import ProductCard from '../components/Collection/ProductCard'
 import { collectionItems } from '../data/jewelryData'
 import { addToCart, isWishlisted, subscribeStore, toggleWishlist } from '../lib/storefrontState'
+import { navigate } from '../lib/navigation'
 
 function ProductDetailPage({ slug }) {
   const product = collectionItems.find((item) => item.slug === slug) || collectionItems[0]
@@ -19,14 +20,14 @@ function ProductDetailPage({ slug }) {
 
   const handleAddToCart = () => {
     addToCart(product.slug)
-    window.location.hash = '#/cart'
+    navigate('/cart')
   }
 
   return (
     <section className="px-4 pb-20 pt-32 sm:pb-28 sm:pt-36">
       {/* Product detail page */}
       <div className="luxury-container">
-        <a href="#/collections" className="text-sm font-bold text-cocoa underline-offset-8 hover:underline">
+        <a href="/collections" className="text-sm font-bold text-cocoa underline-offset-8 hover:underline">
           Back to collection
         </a>
 
@@ -97,7 +98,7 @@ function ProductDetailPage({ slug }) {
               <p className="text-xs font-bold uppercase tracking-[0.28em] text-cocoa">You May Also Like</p>
               <h2 className="font-serif text-4xl font-semibold text-espresso">Complete the look</h2>
             </div>
-            <a href="#/collections" className="text-sm font-bold text-cocoa underline-offset-8 hover:underline">
+            <a href="/collections" className="text-sm font-bold text-cocoa underline-offset-8 hover:underline">
               View all pieces
             </a>
           </div>

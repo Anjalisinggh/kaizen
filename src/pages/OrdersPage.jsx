@@ -29,7 +29,7 @@ function OrdersPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-cocoa">{order.id}</p>
                   <h2 className="mt-2 font-serif text-3xl font-semibold text-espresso">{order.item}</h2>
                   <p className="mt-2 text-sm text-stone-600">{order.date} - {order.total}</p>
-                  <a href={`#/product/${order.slug}`} className="mt-4 inline-block text-sm font-bold text-cocoa underline-offset-8 hover:underline">
+                  <a href={`/product/${order.slug}`} className="mt-4 inline-block text-sm font-bold text-cocoa underline-offset-8 hover:underline">
                     View product
                   </a>
                 </div>
@@ -54,7 +54,7 @@ function OrdersPage() {
             <p className="mx-auto mt-3 max-w-md text-sm leading-7 text-stone-600">
               Completed checkout orders will appear here with tracking details.
             </p>
-            <PrimaryButton href="#/collections" className="mt-6">Start shopping</PrimaryButton>
+            <PrimaryButton href="/collections" className="mt-6">Start shopping</PrimaryButton>
           </FadeIn>
         )}
       </div>

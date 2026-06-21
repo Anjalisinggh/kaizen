@@ -4,7 +4,7 @@ import { isWishlisted, subscribeStore, toggleWishlist } from '../../lib/storefro
 
 function ProductCard({ product }) {
   const HeartIcon = sharedIcons.heart
-  const productUrl = `#/product/${product.slug}`
+  const productUrl = `/product/${product.slug}`
   const [saved, setSaved] = useState(() => isWishlisted(product.slug))
 
   useEffect(() => {

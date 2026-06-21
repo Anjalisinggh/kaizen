@@ -2,6 +2,7 @@ import { useState } from 'react'
 import FadeIn from '../components/Common/FadeIn'
 import PrimaryButton from '../components/Common/PrimaryButton'
 import { getSavedProfile, saveProfile } from '../lib/storefrontState'
+import { navigate } from '../lib/navigation'
 
 function ProfileEditPage() {
   const [profile, setProfile] = useState(() => getSavedProfile())
@@ -28,7 +29,7 @@ function ProfileEditPage() {
 
     setIsSaving(true)
     saveProfile(profile)
-    window.location.hash = '#/profile'
+    navigate('/profile')
   }
 
   return (
@@ -56,7 +57,7 @@ function ProfileEditPage() {
           </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <PrimaryButton type="submit">{isSaving ? 'Saving...' : 'Save Changes'}</PrimaryButton>
-            <a href="#/profile" className="inline-flex min-h-12 items-center justify-center rounded-full border border-sand/80 px-6 text-sm font-bold text-espresso hover:bg-cream">
+            <a href="/profile" className="inline-flex min-h-12 items-center justify-center rounded-full border border-sand/80 px-6 text-sm font-bold text-espresso hover:bg-cream">
               Cancel
             </a>
           </div>

@@ -37,7 +37,7 @@ function AboutContent() {
               <p className="mt-6 max-w-2xl text-sm leading-7 text-stone-600">
                 Our atelier pairs warm precious metals with fluid forms, balancing statement scale and delicate wearability for dinners, vows, galleries, and the everyday rituals in between.
               </p>
-              <PrimaryButton href="#/about" className="mt-8">Learn More</PrimaryButton>
+              <PrimaryButton href="/about" className="mt-8">Learn More</PrimaryButton>
             </FadeIn>
           </div>
 

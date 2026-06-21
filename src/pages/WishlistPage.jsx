@@ -34,7 +34,7 @@ function WishlistPage() {
             <p className="mx-auto mt-3 max-w-md text-sm leading-7 text-stone-600">
               Tap the heart on any product to build your own saved edit.
             </p>
-            <PrimaryButton href="#/collections" className="mt-6">Browse collection</PrimaryButton>
+            <PrimaryButton href="/collections" className="mt-6">Browse collection</PrimaryButton>
           </FadeIn>
         )}
       </div>

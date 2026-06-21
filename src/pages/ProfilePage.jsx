@@ -104,11 +104,11 @@ function ProfilePage() {
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col">
-              <PrimaryButton href="#/profile/edit" variant="light" className="w-full">
+              <PrimaryButton href="/profile/edit" variant="light" className="w-full">
                 Edit Profile
               </PrimaryButton>
               <a
-                href="#/"
+                href="/"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/15 px-6 text-sm font-bold text-white transition hover:bg-white hover:text-espresso"
               >
                 <FiLogOut /> Sign Out
@@ -142,7 +142,7 @@ function ProfilePage() {
                   <h2 className="mt-2 font-serif text-4xl font-semibold text-espresso">Recent purchases</h2>
                 </div>
                 <a
-                  href="#/orders"
+                  href="/orders"
                   className="inline-flex items-center gap-2 rounded-full bg-cream px-5 py-3 text-xs font-bold text-espresso transition hover:bg-espresso hover:text-white"
                 >
                   <FiTruck /> Track All
@@ -153,7 +153,7 @@ function ProfilePage() {
                 {orders.slice(0, 3).map((order) => (
                   <a
                     key={order.id}
-                    href={`#/product/${order.slug}`}
+                    href={`/product/${order.slug}`}
                     className="grid gap-4 rounded-[1.35rem] border border-stone-200/70 bg-ivory/70 p-3 transition hover:bg-white sm:grid-cols-[88px_1fr_auto]"
                   >
                     <img src={order.image} alt={order.item} className="size-22 rounded-[1rem] object-cover" />
@@ -220,7 +220,7 @@ function ProfilePage() {
               <p className="text-xs font-bold uppercase tracking-[0.28em] text-cocoa">Wishlist</p>
               <h2 className="font-serif text-4xl font-semibold text-espresso">Saved for later</h2>
             </div>
-            <a href="#/collections" className="text-sm font-bold text-cocoa underline-offset-8 hover:underline">
+            <a href="/collections" className="text-sm font-bold text-cocoa underline-offset-8 hover:underline">
               View collection
             </a>
           </div>

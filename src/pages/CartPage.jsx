@@ -10,6 +10,7 @@ import {
   subscribeStore,
   updateCartQuantity,
 } from '../lib/storefrontState'
+import { navigate } from '../lib/navigation'
 
 function CartPage({ slug }) {
   const [cartItems, setCartItems] = useState(() => getCartItems())
@@ -18,7 +19,7 @@ function CartPage({ slug }) {
   useEffect(() => {
     if (slug) {
       addToCart(slug)
-      window.location.hash = '#/cart'
+      navigate('/cart')
     }
   }, [slug])
 
@@ -81,7 +82,7 @@ function CartPage({ slug }) {
                 <FiShoppingBag className="mx-auto text-4xl text-cocoa" />
                 <h2 className="mt-4 font-serif text-3xl font-semibold text-espresso">Your bag is empty</h2>
                 <p className="mt-2 text-sm text-stone-600">Save a piece to your bag before checkout.</p>
-                <PrimaryButton href="#/collections" className="mt-6">Shop collection</PrimaryButton>
+                <PrimaryButton href="/collections" className="mt-6">Shop collection</PrimaryButton>
               </div>
             )}
           </FadeIn>
@@ -99,13 +100,13 @@ function CartPage({ slug }) {
                 <span>{formatPrice(total)}</span>
               </div>
             </div>
-            <PrimaryButton href={cartItems.length > 0 ? '#/checkout' : '#/collections'} variant="light" className="mt-8 w-full">
+            <PrimaryButton href={cartItems.length > 0 ? '/checkout' : '/collections'} variant="light" className="mt-8 w-full">
               <FiCreditCard className="mr-2" /> Checkout
             </PrimaryButton>
             <div className="mt-5 flex items-center gap-3 rounded-full bg-white/10 px-4 py-3 text-sm text-cream/80">
               <FiTruck className="text-sand" /> Ships in 2-3 business days
             </div>
-            <a href="#/collections" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-sand hover:text-white">
+            <a href="/collections" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-sand hover:text-white">
               <FiShoppingBag /> Continue shopping
             </a>
           </FadeIn>
